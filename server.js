@@ -1,6 +1,10 @@
 const exp=require('express')
 const app=exp()
+const cors=require('cors')
 require('dotenv').config()
+
+// enable cors for all routes
+app.use(cors());
 
 //application level middleware
 app.use(exp.json())
