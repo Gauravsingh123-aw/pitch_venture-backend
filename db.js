@@ -4,7 +4,7 @@ require('dotenv').config()
 // connecting to db
 const DB_URL=process.env.DB_URL
 mongoose.connect(DB_URL)
-.then((data)=>console.log('connection established',data))
+.then(()=>console.log('connection established'))
 .catch(err=>console.log(err))
 
 // schema
