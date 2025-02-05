@@ -69,11 +69,12 @@ const startupSchema=mongoose.Schema({
     },
     industry:{
         type:String,
+        enum: ['technology', 'medical', 'buisness', 'fashion','research','food','manufacturing'],
         required:true
     },
     stage: { type: String, enum: ['Idea', 'MVP', 'Growth', 'Scaling'] },
     funding_goal:{type: Number, required: true},
-    funding_raised:{type:Number,required:true},
+    funding_raised:{type:Number},
     team_members:[{
         name:{type:String},
         stake:{type:Number},
@@ -86,9 +87,9 @@ const startupSchema=mongoose.Schema({
     paymentInfo:{
         accoundHolderName:{type:String},
         bankName:{type:String},
-        accoundNumber:{type:String},
-        routingNumber:{type:String},
-        stripId:{type:String}
+        accountNumber:{type:String},
+        // routingNumber:{type:String},
+        // stripId:{type:String}
     },
     investors: [{
         investorId: { type: mongoose.Schema.Types.ObjectId, ref: 'Investor' },
@@ -96,7 +97,10 @@ const startupSchema=mongoose.Schema({
         stakePercentage: { type: Number }
       }],
     
-    websiteurl:{type:String}
+    websiteurl:{type:String},
+    interested_investors:[{
+        type:String
+    }]
 
 })
 

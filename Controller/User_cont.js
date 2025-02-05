@@ -13,22 +13,22 @@ let userRegistration=async (req,res)=>{
         res.status(201).send({message:'user created',payload:ans})
     }
     else{
-        res.status(409).send({message:'user already exists'})
+        res.status(201).send({message:'user already exists'})
     }
 }
 
 //user login
 
 let userLogin=async (req,res)=>{
-    let body=req.body.data
+    let body=req.body
     let search=await User.find({username:body.username});
     if(search.length===0){
-        res.status(404).send({message:'Invalid Username'})
+        res.status(201).send({message:'Invalid Username'})
     }
     else{
         const result=await bcryptjs.compare(body.password,search[0].password);
         if(result==false){
-            res.status(401).send({message:'wrong password'})
+            res.status(201).send({message:'wrong password'})
         }
         else{
             const signedToken = jwt.sign(
@@ -36,9 +36,11 @@ let userLogin=async (req,res)=>{
                 process.env.SECRET_KEY,
                 { expiresIn: "1d" }
             );
-            res.status(200).send({message:"login successful",payload:signedToken,user:search[0]});
+            res.status(201).send({message:"login successful",token:signedToken,user:search[0]});
         }
     }
 }
+
+
 
 module.exports={userRegistration,userLogin}
