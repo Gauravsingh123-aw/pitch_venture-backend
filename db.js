@@ -109,27 +109,34 @@ const investorSchema=mongoose.Schema({
         type:String,
         required:true
     },
-    investmentRange:{
-        min:{type:Number , default:0},
-        max:{type:Number}
+    investment_range:{
+        type:String
     },
-    investmentExperience: { type: String, enum: ['Beginner', 'Experienced', 'Institutional'] },
+    investmentExperience: 
+    {
+        type: String,
+        required:true 
+    },
+    preferred_industry:{type:String},
     investments: [{
         startupId: { type: mongoose.Schema.Types.ObjectId, ref: 'Startup' }, // Reference to the startup
         amountInvested: { type: Number, required: true }, // Amount invested in that startup
         stakePercentage: { type: Number, required: true } // Equity percentage owned
       }],
-    paymentDetails: {
-        cardHolderName: { type: String },
-        cardNumber: { type: String },  // Consider encryption for sensitive info
-        expiryDate: { type: String },
-        stripeCustomerId: { type: String }
-    }
+      paymentInfo:{
+        accoundHolderName:{type:String},
+        bankName:{type:String},
+        accountNumber:{type:String},
+        routingNumber:{type:String},
+        stripId:{type:String}
+    },
+    org:{type:String},
+    location:{type:String}
 })
 
 const User=mongoose.model('user',userSchema);
 const Founder=mongoose.model('founder',founderSchema);
-const Investor=mongoose.model('investor',founderSchema);
+const Investor=mongoose.model('investor',investorSchema);
 const Startup=mongoose.model('startup',startupSchema);
 
 module.exports={User,Founder,Investor,Startup};
