@@ -74,7 +74,7 @@ const startupSchema=mongoose.Schema({
     },
     stage: { type: String, enum: ['Idea', 'MVP', 'Growth', 'Scaling'] },
     funding_goal:{type: Number, required: true},
-    funding_raised:{type:Number},
+    funding_raised:{type:Number,default:0},
     team_members:[{
         name:{type:String},
         stake:{type:Number},
